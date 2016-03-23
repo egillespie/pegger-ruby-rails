@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  get 'games/start'
-
-  get 'games/get'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   root 'static#home'
+
+  scope '/games' do
+    post '/' => 'games#create'
+    scope '/:gameId' do
+      get  '/' => 'games#show'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
