@@ -1,5 +1,5 @@
-require 'Peg'
-require 'Position'
+require 'position'
+require 'peg'
 
 class Game
   COLUMNS=4
