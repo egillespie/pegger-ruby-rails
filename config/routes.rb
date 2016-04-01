@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pegs/update'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -8,6 +10,11 @@ Rails.application.routes.draw do
     post '/' => 'games#create'
     scope '/:gameId' do
       get  '/' => 'games#show', as: :games
+      scope '/pegs' do
+        scope '/:pegId' do
+          put '/' => 'pegs#update'
+        end
+      end
     end
   end
 
