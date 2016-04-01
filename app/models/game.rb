@@ -25,7 +25,11 @@ class Game
 
     def find_by_id gameId
       # Call Game.find_by(gameId: gameId) when attached to database
-      return @@games[gameId]
+      game = @@games[gameId]
+      if !game
+        raise "Game ID #{gameId} does not exist."
+      end
+      return game
     end
 
     private :new

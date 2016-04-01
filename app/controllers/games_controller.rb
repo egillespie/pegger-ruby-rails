@@ -7,7 +7,10 @@ class GamesController < JsonController
   end
 
   def show
-    render nothing: true, status: :ok
+    game = Game.find_by_id params[:gameId].to_i
+    render json: game, status: :ok
+  rescue => e
+    render json: {:message => e.message}, status: :not_found
   end
   
 private
