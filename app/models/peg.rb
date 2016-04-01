@@ -5,17 +5,7 @@ class Peg
     @position = position
   end
   
-  def pegId
-    @pegId
-  end
-  
-  def type
-    @type
-  end
-  
-  def position
-    @position
-  end
+  attr_reader :pegId, :type, :position
   
   def neutral?
     return @type != :red && @type != :green

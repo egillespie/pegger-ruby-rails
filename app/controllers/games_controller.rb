@@ -1,4 +1,4 @@
-class GamesController < JsonController
+class GamesController < ApplicationController
   def create
     game = start_game
     render json: game, status: :created, location: games_url(gameId: game.gameId)

@@ -4,13 +4,7 @@ class Position
     @column = column
   end
   
-  def row
-    @row
-  end
-  
-  def column
-    @column
-  end
+  attr_reader :row, :column
   
   def adjacent_to? position
     if @row == position.row

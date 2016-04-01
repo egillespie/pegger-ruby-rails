@@ -42,21 +42,7 @@ class Game
     calculate_game_over
   end
   
-  def gameId
-    @gameId
-  end
-  
-  def lastPegMoved
-    @lastPegMoved
-  end
-  
-  def pegs
-    @pegs
-  end
-
-  def gameOver
-    @gameOver
-  end
+  attr_reader :gameId, :lastPegMoved, :pegs, :gameOver
   
   def getPeg pegId
     @pegs.each do |peg|
