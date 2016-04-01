@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   scope '/games' do
     post '/' => 'games#create'
     scope '/:gameId' do
-      get  '/' => 'games#show'
+      get  '/' => 'games#show', as: :games
     end
   end
 

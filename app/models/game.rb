@@ -2,6 +2,8 @@ require 'position'
 require 'peg'
 
 class Game
+  @@games = []
+
   COLUMNS=4
   ROWS=2
 
@@ -16,9 +18,14 @@ class Game
         Peg.new(6, :yellow, Position.new(2, 3))
       ]
     end
+    
+    def next_id
+      return @@games.length
+    end
 
-    def directed(data)
-      new(data,true)
+    def find_by_id gameId
+      # Call Game.find_by(gameId: gameId) when attached to database
+      return @@games[gameId]
     end
 
     private :new
@@ -65,6 +72,11 @@ class Game
         return
       end
     end
+  end
+
+  # Remove when attached to database
+  def save
+    @@games[@gameId] = self
   end
 
 private
