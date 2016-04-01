@@ -34,7 +34,7 @@ private
       @peg = nil
     else
       json = JSON.parse request_body, object_class: OpenStruct
-      @peg = Peg.new(json.pegId, json.type, Position.new(json.position.row, json.position.column))
+      @peg = Peg.new(json.pegId, json.type.to_sym, Position.new(json.position.row, json.position.column))
     end
   end
 
