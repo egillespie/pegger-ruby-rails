@@ -54,6 +54,7 @@ class Game
   end
   
   def movePeg peg
+    validate_move peg
     @pegs.each_with_index do |oldPeg, index|
       if oldPeg.pegId == peg.pegId
         @lastPegMoved = oldPeg
@@ -70,6 +71,7 @@ class Game
   end
 
 private
+
   def calculate_game_over
     pegs.each do |peg|
       if !peg.neutral?
@@ -81,7 +83,56 @@ private
         end
       end
     end
-    
     @gameOver = false
+  end
+
+  def validate_move pegWithNewPosition
+    if @gameOver
+      raise 'The game is over. No additional pegs may be moved.'
+    end
+    
+    pegWithOldPosition = getPeg pegWithNewPosition.pegId
+    
+    if pegWithOldPosition.type != pegWithNewPosition.type
+      raise 'The peg type cannot be changed.'
+    end
+    
+    fromPosition = pegWithOldPosition.position;
+    toPosition = pegWithNewPosition.position;
+
+    if toPosition.column < 1 || toPosition.column > COLUMNS
+      raise 'The peg cannot be moved to that column.'
+    elsif toPosition.row < 1 || toPosition.row > ROWS
+      raise 'The peg cannot be moved to that row.'
+    elsif toPosition == fromPosition
+      raise 'The peg must be moved.'
+    elsif toPosition.column != fromPosition.column && toPosition.row != fromPosition.row
+      raise 'The peg cannot be moved diagonally.'
+    elsif (toPosition.column - fromPosition.column).abs > 2
+      raise 'That location is too far away.'
+    elsif (toPosition.column - fromPosition.column).abs == 2
+      foundMiddlePeg = false;
+      middleColumn = (toPosition.column + fromPosition.column) / 2;
+      @pegs.each do |peg|
+        position = peg.position;
+        if position.row == toPosition.row && position.column == middleColumn
+          foundMiddlePeg = true;
+          break;
+        end
+      end
+      if !foundMiddlePeg
+        raise 'The peg cannot jump an empty space.'
+      end
+    end
+
+    @pegs.each do |peg|
+      if toPosition == peg.position
+        raise 'Another peg is in that position.'
+      end
+    end
+
+    if @lastPegMoved && @lastPegMoved.pegId === pegWithNewPosition.pegId && @lastPegMoved.position == toPosition
+      raise 'This peg cannot be returned to its previous location.'
+    end
   end
 end

@@ -6,6 +6,12 @@ class Position
   
   attr_reader :row, :column
   
+  def == position
+    return @row == position.row && @column == position.column
+  end
+  
+  alias :eql? :==
+  
   def adjacent_to? position
     if @row == position.row
       return @column == position.column - 1 || @column == position.column + 1

@@ -22,7 +22,7 @@ class PegsController < ApplicationController
     game.movePeg @peg
     game.save
     render nothing: true, status: :see_other, location: games_url(gameId: gameId)
-  rescue
+  rescue => e
     render json: {:message => e.message}, status: :unprocessable_entity
   end
   
