@@ -12,7 +12,7 @@ to compare, contrast, and learn Ruby on Rails or any of the other Pegger apps/tu
 If you want to run Pegger locally, you'll need Ruby. With those installed, just run the following commands:
 
 ```bash
-# todo
+# rails server
 ```
 
 Then visit http://localhost:3000 in your browser to get started!
