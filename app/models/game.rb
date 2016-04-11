@@ -97,8 +97,8 @@ private
       raise 'The peg type cannot be changed.'
     end
     
-    fromPosition = pegWithOldPosition.position;
-    toPosition = pegWithNewPosition.position;
+    fromPosition = pegWithOldPosition.position
+    toPosition = pegWithNewPosition.position
 
     if toPosition.column < 1 || toPosition.column > COLUMNS
       raise 'The peg cannot be moved to that column.'
@@ -111,13 +111,13 @@ private
     elsif (toPosition.column - fromPosition.column).abs > 2
       raise 'That location is too far away.'
     elsif (toPosition.column - fromPosition.column).abs == 2
-      foundMiddlePeg = false;
-      middleColumn = (toPosition.column + fromPosition.column) / 2;
+      foundMiddlePeg = false
+      middleColumn = (toPosition.column + fromPosition.column) / 2
       @pegs.each do |peg|
-        position = peg.position;
+        position = peg.position
         if position.row == toPosition.row && position.column == middleColumn
-          foundMiddlePeg = true;
-          break;
+          foundMiddlePeg = true
+          break
         end
       end
       if !foundMiddlePeg
