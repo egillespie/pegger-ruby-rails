@@ -16,7 +16,7 @@ class GamesController < ApplicationController
 private
 
   def start_game
-    game = Game.start Game.next_id
+    game = Game.start
     game.save
     return game
   end

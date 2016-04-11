@@ -17,6 +17,7 @@ class PegsController < ApplicationController
       game = Game.find_by_id game_id
     rescue => e
       render json: {:message => e.message}, status: :not_found
+      return
     end
     
     game.movePeg @peg

@@ -8,7 +8,8 @@ class Game
   ROWS=2
 
   class << self
-    def start gameId
+    def start
+      gameId = next_id
       new gameId, nil, [
         Peg.new(1, :red, Position.new(1, 1)),
         Peg.new(2, :red, Position.new(2, 4)),
