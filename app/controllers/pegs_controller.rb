@@ -2,26 +2,26 @@ class PegsController < ApplicationController
   before_filter :parse_request
 
   def update
-    gameId = Integer(params[:gameId]) rescue nil
-    pegId = Integer(params[:pegId]) rescue nil
+    game_id = Integer(params[:game_id]) rescue nil
+    peg_id = Integer(params[:id]) rescue nil
 
-    if !pegId
+    if !peg_id
       render nothing: true, status: :bad_request
       return
-    elsif pegId != @peg.pegId
+    elsif peg_id != @peg.pegId
       render nothing: true, status: :conflict
       return
     end
     
     begin
-      game = Game.find_by_id gameId
+      game = Game.find_by_id game_id
     rescue => e
       render json: {:message => e.message}, status: :not_found
     end
     
     game.movePeg @peg
     game.save
-    render nothing: true, status: :see_other, location: games_url(gameId: gameId)
+    render nothing: true, status: :see_other, location: game_url(id: game_id)
   rescue => e
     render json: {:message => e.message}, status: :unprocessable_entity
   end

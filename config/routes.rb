@@ -4,16 +4,8 @@ Rails.application.routes.draw do
 
   root 'static#home'
 
-  scope '/games' do
-    post '/' => 'games#create'
-    scope '/:gameId' do
-      get  '/' => 'games#show', as: :games
-      scope '/pegs' do
-        scope '/:pegId' do
-          put '/' => 'pegs#update'
-        end
-      end
-    end
+  resources :games, only: [:show, :create] do
+    resources :pegs, only: [:update]
   end
 
   # Example of regular route:
